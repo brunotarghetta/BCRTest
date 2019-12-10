@@ -21,9 +21,12 @@ steps:
   displayName: 'Build'
 
 - task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
   inputs:
+    SourceFolder: $(Build.SourcesDirectory)
     contents: '**/*.apk'
-    targetFolder: '$(build.ArtifactStagingDirectory)'
+    targetFolder: '$(build.artifactStagingDirectory)'
+    overWrite: true
 
 - task: PublishBuildArtifacts@1
   inputs:
