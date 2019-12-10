@@ -9,19 +9,37 @@ trigger:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+
 - task: Npm@1
   inputs:
     command: 'install'
 
-- task: ArchiveFiles@2
+- script: sudo npm install -g ionic cordova
+  displayName: 'Install Ionic Cordoba Globally'
+
+- script: sudo ionic cordova build android
+  displayName: 'Build'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    SourceFolder: $(Build.SourcesDirectory)/platforms/android/app/build/outputs/apk/debug
+    contents: '**/*.apk'
+    targetFolder: '$(build.artifactStagingDirectory)'
+    overWrite: true
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'App center Bruno'
+    appSlug: 'BCR-Org/BCRTest'
+    appFile: 'platforms/android/app/build/outputs/apk/debug/app-debug.apk'
+    symbolsOption: 'Android'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'Notas de release'
+    destinationType: 'groups'
