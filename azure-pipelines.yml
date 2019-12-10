@@ -17,5 +17,5 @@ steps:
 - script: sudo npm install -g ionic cordova
   displayName: 'Install Ionic Cordoba Globally'
 
-- script: ionic cordova build android
+- script: sudo ionic cordova build android
   displayName: 'Build'
