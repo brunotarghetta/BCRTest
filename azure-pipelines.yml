@@ -16,6 +16,11 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
+    customCommand: 'install -g ionic cordova'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
     customCommand: 'run app:ionic-cordova-build --platform=android'
 
 - task: ArchiveFiles@2
