@@ -33,3 +33,13 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'App center Bruno'
+    appSlug: 'BCR-Org/BCRTest'
+    appFile: 'platforms/android/app/build/outputs/apk/debug'
+    symbolsOption: 'Android'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'Notas de release'
+    destinationType: 'groups'
