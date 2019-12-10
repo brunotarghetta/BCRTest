@@ -23,13 +23,9 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
   inputs:
-    SourceFolder: $(Build.SourcesDirectory)
+    SourceFolder: $(Build.SourcesDirectory)/platforms/android/app/build/outputs/apk/debug
     contents: '**/*.apk'
     targetFolder: '$(build.artifactStagingDirectory)'
     overWrite: true
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+
