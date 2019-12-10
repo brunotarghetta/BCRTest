@@ -9,29 +9,17 @@ trigger:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+
 - task: Npm@1
   inputs:
     command: 'install'
 
-- task: Npm@1
+- task: Npm@1   
   inputs:
     command: 'custom'
-    customCommand: 'install -g ionic cordova'
+    customCommand: 'install -g ionic'
 
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'run app:ionic-cordova-build --platform=android'
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    customCommand: 'ionic cordova build android'
