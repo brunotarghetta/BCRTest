@@ -14,12 +14,8 @@ steps:
   inputs:
     command: 'install'
 
-- task: Npm@1   
-  inputs:
-    command: 'custom'
-    customCommand: 'install -g ionic'
+- script: sudo npm install -g ionic
+  displayName: 'Install Ionic Globally'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'ionic cordova build android'
+- script: ionic cordova build android
+  displayName: 'Build'
