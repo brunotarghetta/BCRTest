@@ -1,5 +1,7 @@
 {
   "name": "BCRTest",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
