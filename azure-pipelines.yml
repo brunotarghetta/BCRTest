@@ -13,6 +13,11 @@ steps:
   inputs:
     command: 'install'
 
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'ionic cordova build android'
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
